@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182438650817",
+    "project_id": "organiko-cedb5",
+    "storage_bucket": "organiko-cedb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182438650817:android:7f92ae9725eba0d2ba4540",
+        "android_client_info": {
+          "package_name": "com.example.organiko1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBELhTvl1ZNThsNow2XQKdq4-3dOLe7DUc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
