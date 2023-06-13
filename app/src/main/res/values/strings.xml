@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GrowPro0.1</string>
+    <string name="app_name">Organiko</string>
     <string name="title_home">Home</string>
     <string name="title_camera">Camera</string>
     <string name="title_notifications">Notifications</string>
@@ -12,8 +12,7 @@
     <string name="clave">Clave</string>
     <string name="correo">Correo</string>
     <string name="texto7">Crea una nueva cuenta</string>
-    <string name="texto8">Ya te has registrado</string>
-    <string name="ingresaqui">  Ingresa aquí </string>
+    <string name="texto8">Ya te has registrado. Ingresa aquí</string>
     <string name="texto9">Nombre</string>
     <string name="texto12">Fecha de Nacimiento</string>
     <string name="ingresar">Ingresar</string>
@@ -24,12 +23,11 @@
     <string name="camposObligatoriosMessg">Por favor, ingrese un Email y una clave</string>
     <string name="nombreCompleto">Nombre Completo</string>
     <string name="registrando">Registrando</string>
-    <string name="nombre">Nombre:</string>
-    <string name="nombreCientifico">Nombre Cientifico: </string>
-    <string name="bibliografia">Biblografia: </string>
-    <string name="status">Status: </string>
-    <string name="familia">Familia: </string>
+    <string name="nombreTrago">Nombre:</string>
+    <string name="ingredientes">Ingredientes: </string>
+    <string name="pasos">Pasos: </string>
     <!-- TODO: Remove or change this placeholder text -->
+    <string name="espere">Cargando...</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_dashboard">Dashboard</string>

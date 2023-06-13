@@ -1,5 +1,7 @@
 package com.example.organiko1.Activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.organiko1.R;
@@ -23,6 +25,20 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Bundle intent = getIntent().getExtras();
+        if (intent!=null) {
+            String publisher = intent.getString( "publisherid");
+
+            //TODO(1): Escribir en las preferencias "PREFS" el par con clave "profileid" y con valor publisher
+            SharedPreferences preferences = getSharedPreferences( "PREFS", Context.MODE_PRIVATE );
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("profileid", publisher );
+            editor.apply();
+
+        } else {
+
+        }
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each

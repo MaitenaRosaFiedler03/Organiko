@@ -2,6 +2,7 @@ package com.example.organiko1.Activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import com.example.organiko1.Class.OneDrink.Drink;
 import com.example.organiko1.Class.OneDrink.Drinks;
 import com.example.organiko1.R;
 import com.example.organiko1.Service.DrinkService;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,6 +24,7 @@ public class viewDrinkActivity extends AppCompatActivity {
 
     private TextView nombrDrink;
     private TextView ingredientes;
+    private ImageView foto ;
     private TextView pasos;
     private Drink bebe;
 
@@ -32,6 +35,7 @@ public class viewDrinkActivity extends AppCompatActivity {
 
         nombrDrink = (TextView)findViewById(R.id.nombreTrago);
         ingredientes = (TextView)findViewById(R.id.ingredientes);
+        foto = (ImageView) findViewById(R.id.foto);
         pasos = (TextView)findViewById(R.id.pasos);
 
 
@@ -56,7 +60,7 @@ public class viewDrinkActivity extends AppCompatActivity {
                         if (respon != null && respon.getDrinks() != null && !respon.getDrinks().isEmpty()) {
 
                             bebe = respon.getDrinks().get(0);
-
+                            Picasso.get().load(bebe.getStrDrinkThumb()).into(foto);
                             nombrDrink.setText(bebe.getStrDrink());
                             setIngredientes(ingredientes, bebe);
                             //pasos.setText(bebe.getStrInstructions());
