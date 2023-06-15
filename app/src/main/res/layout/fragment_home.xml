@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/black"
     tools:context=".Activity.MainActivity">
 
     <Button
-        android:id="@+id/Ajustes"
-        android:layout_width="76dp"
-        android:layout_height="45dp"
+        android:id="@+id/buscar"
+        android:layout_width="115dp"
+        android:layout_height="40dp"
         android:button="@mipmap/ic_launcher_ajustes"
-        android:text="Button"
+        android:text="@string/buscar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.943"
@@ -25,14 +25,15 @@
         android:layout_width="199dp"
         android:layout_height="46dp"
         android:ems="10"
-        android:focusable="false"
         android:gravity="center_horizontal"
         android:inputType="textPersonName"
         android:singleLine="false"
         android:text="@string/buscar"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         android:textAlignment="center"
         android:textAllCaps="false"
-        android:textIsSelectable="false"
+        android:textIsSelectable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.242"
@@ -53,14 +54,16 @@
 
     <TextView
         android:id="@+id/texto1"
-        android:layout_width="74dp"
-        android:layout_height="18dp"
+        android:layout_width="124dp"
+        android:layout_height="34dp"
         android:text="@string/novedades"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.263" />
+        app:layout_constraintVertical_bias="0.23" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

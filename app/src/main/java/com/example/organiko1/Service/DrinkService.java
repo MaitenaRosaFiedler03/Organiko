@@ -17,5 +17,8 @@ public interface DrinkService {
     @GET("lookup.php")
     Call<Drinks> getDrink(@Query("i") String i);
 
+    @GET("search.php?")
+    Call<DrinksREC> getFavs(@Query("s") String i);
+
 
 }

@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
         private ActivityLoginBinding binding;
 
+
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
             Button acceder = findViewById(R.id.acceder);
 
             TextView registro = findViewById(R.id.registro);
+            //TODO(4): inicializar el atributo auth a la instancia de FirebaseAuth
 
 
             registro.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@androidx.annotation.NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-
+                                            pd.dismiss();
                                             // El inicio de sesión fue exitoso
                                             String token =  task.getResult().getUser().getIdToken(true).toString();
                                             FirebaseUser user = auth.getCurrentUser();
@@ -90,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
                                             finish();
+
                                         } else {
                                             // El inicio de sesión falló
                                             Toast.makeText(LoginActivity.this, "Inicio de sesión fallido.",

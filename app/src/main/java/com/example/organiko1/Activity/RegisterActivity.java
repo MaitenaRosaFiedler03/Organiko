@@ -24,15 +24,11 @@ import com.google.firebase.auth.FirebaseUser;
 public class RegisterActivity extends AppCompatActivity {
 
 
-        private FirebaseAuth mAuth;
-
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_register);
 
-            // Inicializa la instancia de FirebaseAuth
-            mAuth = FirebaseAuth.getInstance();
 
             // Configura el evento del botón de registro
             Button registerButton = findViewById(R.id.registrar);
@@ -40,17 +36,13 @@ public class RegisterActivity extends AppCompatActivity {
             EditText pss = findViewById(R.id.clave);
 
 
-            String email1 = correo.getText().toString();
-            String password1 = pss.getText().toString();
+            TextView login = findViewById(R.id.texto8);
 
 
-            TextView login = findViewById(R.id.);
-
-
-            registro.setOnClickListener(new View.OnClickListener() {
+            login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                 }
             });
@@ -60,43 +52,45 @@ public class RegisterActivity extends AppCompatActivity {
             auth = FirebaseAuth.getInstance();
 
 
-            acceder.setOnClickListener( new View.OnClickListener() {
+            registerButton.setOnClickListener( new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    ProgressDialog pd = showProgressDialog(LoginActivity.this);
+                    ProgressDialog pd = showProgressDialog(RegisterActivity.this);
 
+                    String email1 = correo.getText().toString();
+                    String password1 = pss.getText().toString();
 
                     //si el email o la contraseñ a estan vacios manda mensaje de error
                     if (TextUtils.isEmpty(email1) || TextUtils.isEmpty(password1)) {
                         Toast.makeText(RegisterActivity.this, getText(R.string.camposObligatoriosMessg), Toast.LENGTH_SHORT).show();
                     } else {
-                        mAuth.createUserWithEmailAndPassword(email1, password1)
-                                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            // El registro fue exitoso
-                                            FirebaseUser user = mAuth.getCurrentUser();
-                                            // Realiza las acciones necesarias después del registro exitoso
-                                        } else {
-                                            // El registro falló
-                                            Toast.makeText(RegisterActivity.this, "Registro fallido.",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
+                        auth.createUserWithEmailAndPassword(email1, password1)
+                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser user = auth.getCurrentUser();
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        startActivity(intent);
+
+                                    } else {
+
+                                        Toast.makeText(RegisterActivity.this, "Registro fallido.",
+                                                Toast.LENGTH_SHORT).show();
                                     }
-                                });
+                                }
+                            });
                     }
                 }
             });
         }
 
     ProgressDialog showProgressDialog(Context context) {
-        final ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+        final ProgressDialog pd = new ProgressDialog(RegisterActivity.this);
         pd.setMessage(context.getString(R.string.espere));
         pd.show();
         return pd;
     }
+}
 
-        }
-    }

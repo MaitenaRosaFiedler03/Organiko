@@ -14,6 +14,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.organiko1.databinding.ActivityMain2Binding;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FirebaseApp.initializeApp(this);
 
         binding = ActivityMain2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -30,13 +33,11 @@ public class MainActivity extends AppCompatActivity {
         if (intent!=null) {
             String publisher = intent.getString( "publisherid");
 
-            //TODO(1): Escribir en las preferencias "PREFS" el par con clave "profileid" y con valor publisher
-            SharedPreferences preferences = getSharedPreferences( "PREFS", Context.MODE_PRIVATE );
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("profileid", publisher );
+            SharedPreferences prefs= getSharedPreferences("PREFS",
+                    Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("profileid", FirebaseAuth.getInstance().getCurrentUser().getUid());
             editor.apply();
-
-        } else {
 
         }
 

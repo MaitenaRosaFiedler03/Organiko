@@ -48,17 +48,17 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="303dp"
-        android:layout_height="33dp"
+        android:layout_width="296dp"
+        android:layout_height="46dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.417"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texto4"
-        app:layout_constraintVertical_bias="0.018" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/texto5"
@@ -76,7 +76,7 @@
     <EditText
         android:id="@+id/psswrd"
         android:layout_width="308dp"
-        android:layout_height="37dp"
+        android:layout_height="43dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"

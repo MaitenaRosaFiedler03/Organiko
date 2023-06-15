@@ -1,10 +1,14 @@
 package com.example.organiko1.ui.home;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
+
+import android.content.SharedPreferences;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +31,7 @@ import com.example.organiko1.Class.DrinkRec.DrinksREC;
 import com.example.organiko1.R;
 import com.example.organiko1.Service.DrinkService;
 import com.example.organiko1.databinding.FragmentHomeBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,16 +59,15 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
+
         final TextView textView = binding.texto1;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
 
         RecyclerView recyclerView = root.findViewById(R.id.recyclerView1);
         this.bebidas = new ArrayList<>();
         this.drinkArrayList = new ArrayList<>();
-
-
-
-
 
         final DrinkAdapter adaptador = new DrinkAdapter(drinkArrayList, new DrinkAdapter.OnItemClickListener() {
             @Override
@@ -89,21 +93,17 @@ public class HomeFragment extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-
+        binding.busqueda.setText("");
 
         DrinkService servicioPlantAPI = retrofit.create(DrinkService.class);
 
-
         Call<DrinksREC> callPlantas = servicioPlantAPI.getAlcoholDrinks();
-
-
 
         callPlantas.enqueue(new Callback<DrinksREC>() {
             @Override
             public void onResponse(Call<DrinksREC> call, Response<DrinksREC> response) {
                 switch(response.code()) {
                     case 200:
-                        Log.d("aaaaa333" , "dentro del call");
                         DrinksREC resultado = response.body();
                         bebidas = resultado.getDrinks();
 
@@ -112,10 +112,8 @@ public class HomeFragment extends Fragment {
 
                         break;
                     case 401:
-                        Log.d("aaaaa333" , "error en el call");
                         break;
                     default:
-                        Log.d("aaaaa333", "datos");
                         break;
                 }
             }
@@ -127,6 +125,46 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        binding.buscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<DrinksREC> callPlantas;
+
+                if(binding.busqueda.getText().toString().isEmpty()){
+                    callPlantas = servicioPlantAPI.getAlcoholDrinks();
+                }
+                else{
+                    callPlantas= servicioPlantAPI.getFavs(binding.busqueda.getText().toString());
+                }
+
+
+                callPlantas.enqueue(new Callback<DrinksREC>() {
+                    @Override
+                    public void onResponse(Call<DrinksREC> call, Response<DrinksREC> response) {
+                        switch(response.code()) {
+                            case 200:
+                                DrinksREC resultado = response.body();
+                                bebidas = resultado.getDrinks();
+
+                                adaptador.setDatos(bebidas);
+                                adaptador.notifyDataSetChanged();
+
+                                break;
+                            case 401:
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DrinksREC> call, Throwable t) {
+                        Toast toast = Toast.makeText(getContext(), "Error de carga. Compruebe su conexión", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                });
+            }
+        });
 
 
         return root;
